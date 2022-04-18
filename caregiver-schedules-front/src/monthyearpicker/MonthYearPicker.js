@@ -30,6 +30,7 @@ class MonthYearPicker extends Component {
     };
 
     onMonthsWheel = (event) => {
+        event.preventDefault();
         if (event.deltaY > 0) {
             this.setDate(this.state.nextMonth, this.state.year);
         } else {
@@ -38,6 +39,7 @@ class MonthYearPicker extends Component {
     };
 
     onYearsWheel = (event) => {
+        event.preventDefault();
         if (event.deltaY > 0) {
             this.setDate(this.state.month, this.state.nextYear);
         } else {

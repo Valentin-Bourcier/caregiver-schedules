@@ -1,6 +1,7 @@
 import "./App.css";
 import { Component, Fragment } from "react";
 import MonthYearPicker from "./monthyearpicker/MonthYearPicker";
+import Month from "./month/Month";
 
 class App extends Component {
     onDateChange = (date) => {
@@ -13,8 +14,10 @@ class App extends Component {
             <Fragment>
                 <header>
                     <MonthYearPicker onChange={this.onDateChange} />
-                    <p>{this.state?.date.toString()}</p>
                 </header>
+                <main>
+                    <Month date={this.state?.date} />
+                </main>
             </Fragment>
         );
     }
