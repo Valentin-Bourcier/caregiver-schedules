@@ -1,4 +1,8 @@
 {
+    "date": {
+        "month": "Mois",
+        "year": "Année"
+    },
     "days": {
         "1": "Lundi",
         "2": "Mardi",

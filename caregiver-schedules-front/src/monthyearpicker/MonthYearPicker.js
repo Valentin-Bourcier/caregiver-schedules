@@ -2,6 +2,8 @@ import "./MonthYearPicker.css";
 import { Component } from "react";
 import { withTranslation } from "react-i18next";
 
+import AngleUpIcon from "../assets/icons/angle-up.svg";
+import AngleDownIcon from "../assets/icons/angle-down.svg";
 class MonthYearPicker extends Component {
     constructor(props) {
         super(props);
@@ -29,23 +31,11 @@ class MonthYearPicker extends Component {
         });
     };
 
-    onMonthsWheel = (event) => {
-        event.preventDefault();
-        if (event.deltaY > 0) {
-            this.setDate(this.state.nextMonth, this.state.year);
-        } else {
-            this.setDate(this.state.previousMonth, this.state.year);
-        }
-    };
+    onNextMonth = () => this.setDate(this.state.nextMonth, this.state.year);
+    onPreviousMonth = () => this.setDate(this.state.previousMonth, this.state.year);
 
-    onYearsWheel = (event) => {
-        event.preventDefault();
-        if (event.deltaY > 0) {
-            this.setDate(this.state.month, this.state.nextYear);
-        } else {
-            this.setDate(this.state.month, this.state.previousYear);
-        }
-    };
+    onNextYear = () => this.setDate(this.state.month, this.state.nextYear);
+    onPreviousYear = () => this.setDate(this.state.month, this.state.previousYear);
 
     onShowPopupClick = () => {
         this.setState((state) =>
@@ -84,42 +74,72 @@ class MonthYearPicker extends Component {
                     <div className="monthyearpicker__popup">
                         <div className="monthyearpicker__content">
                             {this.state.monthSelector && (
-                                <div className="monthyearpicker__selector" onWheel={this.onMonthsWheel}>
-                                    <span className="monthyearpicker__item monthyearpicker__item--faded">
-                                        {t(`months.${this.state.previousMonth}`)}
-                                    </span>
-                                    <span className="monthyearpicker__item monthyearpicker__item--selected">
-                                        {t(`months.${this.state.month}`)}
-                                    </span>
-                                    <span className="monthyearpicker__item monthyearpicker__item--faded">
-                                        {t(`months.${this.state.nextMonth}`)}
-                                    </span>
-                                    <div className="monthyearpicker__buttons">
+                                <div className="monthyearpicker__selector">
+                                    <header className="monthyearpicker__selector-header">{t(`date.month`)}</header>
+                                    <main className="monthyearpicker__selector-content">
+                                        <span
+                                            className="monthyearpicker__navigate-button"
+                                            onClick={this.onPreviousMonth}
+                                        >
+                                            <img className="monthyearpicker__navigate-button-icon" src={AngleUpIcon} />
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--faded">
+                                            {t(`months.${this.state.previousMonth}`)}
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--selected">
+                                            {t(`months.${this.state.month}`)}
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--faded">
+                                            {t(`months.${this.state.nextMonth}`)}
+                                        </span>
+                                        <span className="monthyearpicker__navigate-button" onClick={this.onNextMonth}>
+                                            <img
+                                                className="monthyearpicker__navigate-button-icon"
+                                                src={AngleDownIcon}
+                                            />
+                                        </span>
+                                    </main>
+                                    <footer className="monthyearpicker__selector-buttons">
                                         <button
                                             className="monthyearpicker__button"
                                             onClick={this.onMonthsSelectorClick}
                                         >
                                             Suivant
                                         </button>
-                                    </div>
+                                    </footer>
                                 </div>
                             )}
                             {!this.state.monthSelector && (
                                 <div className="monthyearpicker__selector" onWheel={this.onYearsWheel}>
-                                    <span className="monthyearpicker__item monthyearpicker__item--faded">
-                                        {this.state.previousYear}
-                                    </span>
-                                    <span className="monthyearpicker__item monthyearpicker__item--selected">
-                                        {this.state.year}
-                                    </span>
-                                    <span className="monthyearpicker__item monthyearpicker__item--faded">
-                                        {this.state.nextYear}
-                                    </span>
-                                    <div className="monthyearpicker__buttons">
+                                    <header className="monthyearpicker__selector-header">{t(`date.year`)}</header>
+                                    <main className="monthyearpicker__selector-content">
+                                        <span
+                                            className="monthyearpicker__navigate-button"
+                                            onClick={this.onPreviousYear}
+                                        >
+                                            <img className="monthyearpicker__navigate-button-icon" src={AngleUpIcon} />
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--faded">
+                                            {this.state.previousYear}
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--selected">
+                                            {this.state.year}
+                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--faded">
+                                            {this.state.nextYear}
+                                        </span>
+                                        <span className="monthyearpicker__navigate-button" onClick={this.onNextYear}>
+                                            <img
+                                                className="monthyearpicker__navigate-button-icon"
+                                                src={AngleDownIcon}
+                                            />
+                                        </span>
+                                    </main>
+                                    <footer className="monthyearpicker__selector-buttons">
                                         <button className="monthyearpicker__button" onClick={this.onClosePopupClick}>
                                             Suivant
                                         </button>
-                                    </div>
+                                    </footer>
                                 </div>
                             )}
                         </div>
