@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, protocol } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
 function createWindow() {
@@ -9,7 +9,15 @@ function createWindow() {
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
+            // Workaround to use NodeJs modules. Unsecure !
+            // TODO: Find a more secure way to support NodeJs modules.
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            contextIsolation: false,
+            nodeIntegrationInWorker: true,
+            nodeIntegrationInSubFrames: true
         },
+        autoHideMenuBar: true
     });
 
     // and load the index.html of the app.

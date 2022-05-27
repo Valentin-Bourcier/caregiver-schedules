@@ -6,3 +6,6 @@
 
 # production
 **/build
+
+# App data
+**/caregiver-schedules-data

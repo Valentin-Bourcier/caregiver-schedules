@@ -1,17 +1,20 @@
 import "./Month.css";
 import { Component } from "react";
 import DayLine from "../dayline/DayLine";
-
+import SettingsService from "../services/SettingsService";
 class Month extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            days: []
+            days: [],
+            settings: {}
         };
     }
 
     static getDerivedStateFromProps(props) {
+        const settingsService = props.settingsService || new SettingsService();
+
         const days = [];
         if (props.date) {
             let day = new Date(props.date);
@@ -21,7 +24,8 @@ class Month extends Component {
             }
         }
         return {
-            days: days
+            days: days,
+            settings: settingsService.get()
         };
     }
 
@@ -29,7 +33,7 @@ class Month extends Component {
         return (
             <div className="month">
                 {this.state.days.map((day) => (
-                    <DayLine day={day} />
+                    <DayLine key={day} day={day} />
                 ))}
             </div>
         );
