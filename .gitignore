@@ -8,4 +8,5 @@
 **/build
 
 # App data
-**/caregiver-schedules-data
+**/configuration.json
+

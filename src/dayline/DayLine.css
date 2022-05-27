@@ -1,0 +1,26 @@
+.dayline {
+    min-height: 40px;
+
+    display: grid;
+
+    grid-template-columns: 120px 1fr;
+
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.dayline:last-child {
+    border-bottom: none;
+}
+
+.dayline__date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+
+    border-right: 1px solid lightgray;
+}

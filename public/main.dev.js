@@ -19,7 +19,6 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             // Workaround to use NodeJs modules. Unsecure !
@@ -35,7 +34,6 @@ function createWindow() {
 
     // and load the index.html of the app.
     mainWindow.loadURL("http://localhost:3000");
-    mainWindow.once("ready-to-show", () => mainWindow.show());
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
 }
