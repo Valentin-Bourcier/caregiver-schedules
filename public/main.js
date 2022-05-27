@@ -1,12 +1,25 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, protocol } = require("electron");
 const path = require("path");
+const fs = require("fs");
+const os = require("os");
+
+function initialize() {
+    const configuration = path.join(process.cwd(), "configuration.json");
+    if (!fs.existsSync(configuration)) {
+        const workdir = path.join(os.homedir(), ".caregiver-schedules");
+        fs.writeFileSync(configuration, JSON.stringify({ workdir: workdir }), {
+            encoding: "utf8"
+        });
+    }
+}
 
 function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        show: false,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             // Workaround to use NodeJs modules. Unsecure !
@@ -22,6 +35,7 @@ function createWindow() {
 
     // and load the index.html of the app.
     mainWindow.loadURL("file:///index.html");
+    mainWindow.once("ready-to-show", () => mainWindow.show());
     // Open the DevTools.
     // mainWindow.webContents.openDevTools();
 }
@@ -33,13 +47,14 @@ app.on("ready", () => {
     protocol.interceptFileProtocol(
         "file",
         (request, callback) => {
-            const url = request.url.substring(0, 7); /* all urls start with 'file://' */
+            const url = request.url.substring(7, request.url.length); /* all urls start with 'file://' */
             callback({ path: path.normalize(`${__dirname}/${url}`) });
         },
         (err) => {
             if (err) console.error("Failed to register protocol");
         }
     );
+    initialize();
     createWindow();
 });
 

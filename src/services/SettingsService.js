@@ -1,12 +1,15 @@
+import JsonFileService from "./JsonFileService";
+import WorkdirService from "./WorkdirService";
+
 const path = window.require("path");
 const fs = window.require("fs");
 
 export default class SettingsService {
     constructor() {
-        this.datadir = path.join(process.cwd(), "caregiver-schedules-data");
-        this.filepath = path.join(this.datadir, "settings.json");
+        this.wordirService = new WorkdirService();
+        this.jsonFileService = new JsonFileService();
 
-        if (!fs.existsSync(this.datadir)) fs.mkdirSync(this.datadir, { recursive: true });
+        this.filepath = path.join(this.wordirService.path(), "settings.json");
         if (!fs.existsSync(this.filepath)) {
             this.save({
                 weekend_foreground: "",
@@ -16,20 +19,7 @@ export default class SettingsService {
         }
     }
 
-    get = () => {
-        let settings;
-        if (fs.existsSync(this.filepath)) {
-            settings = fs.readFileSync(this.filepath, {
-                encoding: "utf8"
-            });
-        }
-        return settings ? JSON.parse(settings) : {};
-    };
+    get = () => this.jsonFileService.get(this.filepath);
 
-    save = (settings) => {
-        fs.writeFileSync(this.filepath, JSON.stringify(settings), {
-            encoding: "utf8",
-            flag: "w"
-        });
-    };
+    save = (settings) => this.jsonFileService.save(settings, this.filepath);
 }
