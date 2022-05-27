@@ -1,5 +1,0 @@
-{
-    "extension": ["ts"],
-    "spec": "tests/**/*.{test,spec}.ts",
-    "require": ["ts-node/register", ".mocharc.env"]
-}

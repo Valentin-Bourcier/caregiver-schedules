@@ -20,7 +20,7 @@ class MonthYearPicker extends Component {
             nextMonth: (month + 1) % 12,
             previousYear: year - 1,
             year: year,
-            nextYear: year + 1
+            nextYear: year + 1,
         };
     };
 
@@ -41,7 +41,7 @@ class MonthYearPicker extends Component {
         this.setState((state) =>
             Object.assign(state, {
                 popup: true,
-                monthSelector: true
+                monthSelector: true,
             })
         );
     };
@@ -50,7 +50,7 @@ class MonthYearPicker extends Component {
         this.setState((state) => {
             console.log(state);
             return Object.assign(state, {
-                monthSelector: false
+                monthSelector: false,
             });
         });
     };
@@ -58,7 +58,7 @@ class MonthYearPicker extends Component {
     onClosePopupClick = () => {
         this.setState((state) =>
             Object.assign(state, {
-                popup: false
+                popup: false,
             })
         );
     };
@@ -77,10 +77,7 @@ class MonthYearPicker extends Component {
                                 <div className="monthyearpicker__selector">
                                     <header className="monthyearpicker__selector-header">{t(`date.month`)}</header>
                                     <main className="monthyearpicker__selector-content">
-                                        <span
-                                            className="monthyearpicker__navigate-button"
-                                            onClick={this.onPreviousMonth}
-                                        >
+                                        <span className="monthyearpicker__navigate-button" onClick={this.onPreviousMonth}>
                                             <img className="monthyearpicker__navigate-button-icon" src={AngleUpIcon} />
                                         </span>
                                         <span className="monthyearpicker__item monthyearpicker__item--faded">
@@ -93,17 +90,11 @@ class MonthYearPicker extends Component {
                                             {t(`months.${this.state.nextMonth}`)}
                                         </span>
                                         <span className="monthyearpicker__navigate-button" onClick={this.onNextMonth}>
-                                            <img
-                                                className="monthyearpicker__navigate-button-icon"
-                                                src={AngleDownIcon}
-                                            />
+                                            <img className="monthyearpicker__navigate-button-icon" src={AngleDownIcon} />
                                         </span>
                                     </main>
                                     <footer className="monthyearpicker__selector-buttons">
-                                        <button
-                                            className="monthyearpicker__button"
-                                            onClick={this.onMonthsSelectorClick}
-                                        >
+                                        <button className="monthyearpicker__button" onClick={this.onMonthsSelectorClick}>
                                             Suivant
                                         </button>
                                     </footer>
@@ -113,26 +104,16 @@ class MonthYearPicker extends Component {
                                 <div className="monthyearpicker__selector" onWheel={this.onYearsWheel}>
                                     <header className="monthyearpicker__selector-header">{t(`date.year`)}</header>
                                     <main className="monthyearpicker__selector-content">
-                                        <span
-                                            className="monthyearpicker__navigate-button"
-                                            onClick={this.onPreviousYear}
-                                        >
+                                        <span className="monthyearpicker__navigate-button" onClick={this.onPreviousYear}>
                                             <img className="monthyearpicker__navigate-button-icon" src={AngleUpIcon} />
                                         </span>
                                         <span className="monthyearpicker__item monthyearpicker__item--faded">
                                             {this.state.previousYear}
                                         </span>
-                                        <span className="monthyearpicker__item monthyearpicker__item--selected">
-                                            {this.state.year}
-                                        </span>
-                                        <span className="monthyearpicker__item monthyearpicker__item--faded">
-                                            {this.state.nextYear}
-                                        </span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--selected">{this.state.year}</span>
+                                        <span className="monthyearpicker__item monthyearpicker__item--faded">{this.state.nextYear}</span>
                                         <span className="monthyearpicker__navigate-button" onClick={this.onNextYear}>
-                                            <img
-                                                className="monthyearpicker__navigate-button-icon"
-                                                src={AngleDownIcon}
-                                            />
+                                            <img className="monthyearpicker__navigate-button-icon" src={AngleDownIcon} />
                                         </span>
                                     </main>
                                     <footer className="monthyearpicker__selector-buttons">

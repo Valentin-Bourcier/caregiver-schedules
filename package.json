@@ -1,0 +1,56 @@
+{
+    "name": "caregiver-schedules",
+    "version": "0.1.0",
+    "private": true,
+    "description": "A caregiver schedule editing application",
+    "repository": "https://github.com/Valentin-Bourcier/caregiver-schedules",
+    "author": "Valentin Bourcier",
+    "license": "CeCILL_V2.1",
+    "main": "main.js",
+    "scripts": {
+        "react:start": "react-scripts start",
+        "react:build": "react-scripts build",
+        "react:eject": "react-scripts eject",
+        "electron:start": "electron ./public/main.dev.js",
+        "electron:build": "electron-packager build caregiver-schedules --platform=win32 --arch=x64",
+        "start": "electron .",
+        "start:dev": "concurrently -k --raw \"npm:react:start\" \"npm:electron:start\"",
+        "test": "react-scripts test",
+        "build": "npm run react:build && cpy package.json build && npm run electron:build"
+    },
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.16.1",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
+        "i18next": "^21.6.6",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-i18next": "^11.15.3",
+        "react-scripts": "5.0.0",
+        "web-vitals": "^2.1.2"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "concurrently": "^7.2.1",
+        "cpy-cli": "^4.1.0",
+        "electron": "^19.0.0",
+        "electron-packager": "^15.5.1"
+    }
+}
